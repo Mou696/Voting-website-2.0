@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+    <title>Voting Polls</title>
+    <!-- DaisyUI and Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.13/dist/full.min.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body class="bg-gray-100">
+
+
+    <!-- Role Display -->
+    <div id="role-display" class="absolute top-4 right-4 text-lg font-semibold hidden"></div>
+
+    <!-- Navbar -->
+    <div class="navbar bg-base-100 shadow-md">
+        <div class="flex-none">
+            <button id="hamburger-button" class="btn btn-square btn-ghost">
+                <svg id="hamburger-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block h-5 w-5 stroke-current">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        <div class="flex-1">
+            <a class="btn btn-ghost text-xl font-semibold">Äänestysjärjestelmä</a>
+        </div>
+    </div>
+
+    <!-- Sliding Menu -->
+    <div id="side-menu" class="hidden fixed top-0 left-0 h-full w-64 bg-base-200 shadow-lg transition-transform transform -translate-x-full">
+        <div class="flex justify-between items-center p-4 bg-base-300">
+            <h2 class="text-lg font-bold">Menu</h2>
+            <button id="close-button" class="btn btn-square btn-ghost">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block h-5 w-5 stroke-current">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+                      
+        </div>
+        <div class="p-4">
+            <ul class="mt-4 space-y-2">
+                <li><a href="#" id="login-button" class="btn btn-secondary w-full">Kirjaudu</a></li>
+                <li><a href="javascript:void(0)" id="logout-button" class="btn btn-error hidden w-full" onclick="handleLogout()">Log out</a></li>
+                <li><a href="#" id="create-poll-button" class="btn btn-primary hidden w-full">Luo uusi äänestys</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto mt-12">
+        <h1 class="text-center text-4xl font-bold mb-6">Äänestysjärjestelmä</h1>
+        <div id="polls-container" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 p-4"></div>
+    </div>
+
+    <!-- Modal for Creating New Poll -->
+    <div id="poll-modal" class="modal">
+        <div class="modal-box">
+            <h3 class="font-bold text-lg">Luo uusi äänestys</h3>
+            <form id="createPollForm">
+                <div class="form-control">
+                    <label for="pollName" class="label">Äänestyksen nimi</label>
+                    <input type="text" id="pollName" class="input input-bordered" placeholder="Äänestyksen nimi" required>
+                </div>
+                <div id="options-container" class="form-control mt-4">
+                    <label for="option" class="label">Vaihtoehto</label>
+                    <input type="text" class="input input-bordered" placeholder="Vaihtoehto" required>
+                </div>
+                <button type="button" class="btn btn-outline btn-info" onclick="addPollOption()">Lisää vaihtoehto</button>
+                <button type="submit" class="btn btn-outline btn-info">Luo äänestys</button>
+            </form>
+            <div class="modal-action">
+                <a href="#" class="btn" onclick="document.getElementById('poll-modal').classList.remove('modal-open')">Sulje</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal hidden">
+        <div class="modal-box">
+            <h3 class="font-bold text-lg">Kirjaudu</h3>
+            <div id="login-section" class="form-control">
+                <input type="text" id="username" class="input input-bordered mb-2" placeholder="Käyttäjätunnus" required>
+                <input type="password" id="password" class="input input-bordered mb-2" placeholder="Salasana" required>
+                <button id="login-submit-button" class="btn btn-primary mt-4 w-full">Kirjaudu</button>
+            </div>
+            <div class="modal-action">
+                <a href="#" class="btn" onclick="document.getElementById('login-modal').classList.remove('modal-open')">Sulje</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</body>
+
+</html>
